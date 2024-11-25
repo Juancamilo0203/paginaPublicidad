@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Iniciar sesión</title>
+    <link rel="stylesheet" href="/css/styles.css"> <!-- Asegúrate de que esta ruta apunte a tu archivo CSS -->
+</head>
+<body>
+<div class="login-container">
+    <h2>Iniciar sesión</h2>
+    <form action="/home" method="post">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required><br>
+        <label for="pass">Contraseña:</label>
+        <input type="password" id="pass" name="pass" required><br>
+
+        <button type="submit">Iniciar sesión</button>
+    </form>
+
+    <div th:if="${error}" class="error-message">
+        <p th:text="${error}"></p> <!-- Mensaje de error si no se encuentra el usuario -->
+    </div>
+
+    <p>no estas registrado?</p>
+    <a href="/registro">
+        <button type="button">Regístrate</button>
+    </a>
+</div>
+</body>
+</html>

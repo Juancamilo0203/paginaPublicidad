@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/stylesBinevenida.css">
+    <title>Bienvenida</title>
+</head>
+<body>
+
+
+<!-- Menú Desplegable -->
+<nav class="navbar">
+    <div class="menu-toggle" onclick="toggleMenu()">&#9776;</div> <!-- Botón hamburguesa -->
+    <ul id="nav-links" class="nav-links">
+        <li><a href="#">¿Quiénes somos?</a></li>
+        <li><a href="#">Contáctanos</a></li>
+        <li><a href="#">Sedes</a></li>
+    </ul>
+</nav>
+
+<!-- Carrusel -->
+<div class="carousel">
+    <div class="carousel-images">
+        <img src="/images/imagen1.jpeg" alt="Imagen 1">
+        <img src="/images/imagen2.jpeg" alt="Imagen 2">
+        <img src="/images/imagen3.png" alt="Imagen 3">
+        <img src="/images/imagen4.jpg" alt="Imagen 4">
+
+    </div>
+    <!-- Flechas del carrusel -->
+    <div class="carousel-arrow carousel-arrow-left" onclick="prevImage()">&#10094;</div>
+    <div class="carousel-arrow carousel-arrow-right" onclick="nextImage()">&#10095;</div>
+</div>
+
+<!-- Apartado de Servicios -->
+<h1>Nuestros Servicios</h1>
+<div class="services">
+    <div class="service-card">
+        <h3>Marketing Digital</h3>
+        <p>Impulsamos tu presencia en línea y aumentamos tu visibilidad.</p>
+    </div>
+    <div class="service-card">
+        <h3>Diseño y Desarrollo Web</h3>
+        <p>Creamos sitios web personalizados y adaptativos para tu negocio.</p>
+    </div>
+    <div class="service-card">
+        <h3>Producción Audiovisual</h3>
+        <p>Generamos contenido visual de alta calidad para tus campañas.</p>
+    </div>
+    <div class="service-card">
+        <h3>Campañas Publicitarias</h3>
+        <p>Desarrollamos estrategias publicitarias para maximizar tu alcance.</p>
+    </div>
+</div>
+
+<!-- Scripts para el carrusel y el menú -->
+<script src="/js/script.js"></script>
+
+</body>
+</html>

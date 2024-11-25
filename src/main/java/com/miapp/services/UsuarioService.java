@@ -1,0 +1,25 @@
+package com.miapp.services;
+
+import com.miapp.models.Usuarios;
+import com.miapp.repositories.UsuarioRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class UsuarioService {
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+
+    public List<Usuarios> obtenerUsuarios() {
+        return usuarioRepository.findAll();
+    }
+    public Usuarios obtenerUsuarioPorNombreYPass(String nombre, String pass) {
+        return usuarioRepository.findByNombreAndPass(nombre, pass);
+    }
+    // Método para guardar el nuevo usuario en la base de datos
+    public void guardarUsuario(Usuarios nuevoUsuario) {
+        usuarioRepository.save(nuevoUsuario);
+    }
+}
