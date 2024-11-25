@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/stylesBinevenida.css">
+    <title>Campañas Publicitarias</title>
+</head>
+<body>
+
+<!-- Barra de navegación -->
+<nav class="navbar">
+    <div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
+    <ul id="nav-links" class="nav-links">
+        <li><a href="#">¿Quiénes somos?</a></li>
+        <li><a href="#">Contáctanos</a></li>
+        <li><a href="#">Sedes</a></li>
+    </ul>
+</nav>
+
+<!-- Contenido principal -->
+<div class="content">
+    <h1 style="text-align: center;">Campañas Publicitarias</h1>
+    <p>Diseñamos y ejecutamos campañas publicitarias que conectan con tu público y logran resultados tangibles para tu negocio.</p>
+    <h2>Ejemplos de nuestros servicios:</h2>
+    <ul>
+        <li>Planificación de estrategias de marketing</li>
+        <li>Campañas publicitarias en Google Ads y redes sociales</li>
+        <li>Diseño y difusión de materiales promocionales</li>
+        <li>Análisis de impacto y reportes detallados</li>
+    </ul>
+    <div class="user-session">
+        <span th:if="${session.usuarioNombre == null}">
+            <a href="/home">Iniciar Sesión</a>
+        </span>
+        <span th:if="${session.usuarioNombre != null}">
+            Hola, <span th:text="${session.usuarioNombre}"></span>!
+        </span>
+    </div>
+</div>
+
+<script src="/js/script.js"></script>
+
+</body>
+</html>

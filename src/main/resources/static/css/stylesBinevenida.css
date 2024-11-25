@@ -5,7 +5,9 @@ body {
     padding: 0;
     background-color: #f9f9f9;
 }
-
+h1 {
+    text-align: center;
+}
 /* Barra de navegación */
 .navbar {
     display: flex;
@@ -116,7 +118,6 @@ body {
 }
 
 
-
 /* Apartado de servicios */
 .services {
     display: flex;
@@ -125,15 +126,106 @@ body {
 }
 
 .service-card {
+    display: block; /* Asegura que se comporte como un contenedor */
     padding: 20px;
     background-color: #f4f4f4;
     border-radius: 8px;
     width: 20%;
     text-align: center;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s;
+    transition: transform 0.3s, background-color 0.3s;
+    text-decoration: none; /* Elimina el subrayado */
+    color: #333; /* Define un color base para el texto */
 }
 
 .service-card:hover {
-    transform: translateY(-10px);  /* Efecto hover */
+    transform: translateY(-10px); /* Efecto hover */
+    background-color: #e6e6e6; /* Fondo más claro al pasar el cursor */
+}
+
+.service-card:link,
+.service-card:visited,
+.service-card:hover,
+.service-card:active {
+    text-decoration: none; /* Sin subrayado en todos los estados */
+    color: #333; /* Color uniforme */
+}
+
+/* Centrado del texto <p> */
+.centered-text {
+    text-align: center;
+    font-size: 1.2em;
+    margin: 20px auto;
+    width: 80%;  /* Asegura que no ocupe toda la pantalla */
+}
+
+/* Contenedor de las cartas de servicios */
+.services-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin: 20px 0;
+}
+
+.service-card {
+    background-color: #f4f4f4;
+    width: 23%;  /* Tamaño de cada carta */
+    margin: 10px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    transition: transform 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+}
+
+/* Estilos de la imagen dentro de las cartas */
+.service-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+/* Estilo de los párrafos dentro de cada carta */
+.service-card p {
+    color: #333;
+    font-size: 1em;
+    margin: 0;
+}
+
+/* Ajustes responsivos: cuando la pantalla es más pequeña */
+@media (max-width: 768px) {
+    .services-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .service-card {
+        width: 80%;
+        margin-bottom: 20px;
+    }
+}
+/* Estilo para el <h2> */
+h2 {
+    text-align: center;
+    font-size: 1.5em;  /* Ajusta el tamaño del texto según lo necesites */
+    margin: 20px auto;
+}
+.user-session {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 16px;
+    font-weight: bold;
+}
+.user-session a {
+    text-decoration: none;
+    color: #007bff;
+}
+.user-session a:hover {
+    color: #0056b3;
 }

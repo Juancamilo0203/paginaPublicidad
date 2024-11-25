@@ -2,6 +2,7 @@ package com.miapp.controllers;
 
 import com.miapp.models.Usuarios;
 import com.miapp.services.UsuarioService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -44,20 +45,58 @@ public class UsuarioController {
         return "bienvenida";
     }
 
-    // Procesar el inicio de sesión con el nombre y contraseña
+    @GetMapping("/campañas")
+    public String mostrarcampanas(Model model) {
+        List<Usuarios> usuarios = usuarioService.obtenerUsuarios();
+        model.addAttribute("usuarios", usuarios);
+        return "campañas";
+    }
+
+    @GetMapping("/marketing")
+    public String mostrarMarketin(Model model) {
+        List<Usuarios> usuarios = usuarioService.obtenerUsuarios();
+        model.addAttribute("usuarios", usuarios);
+        return "marketing";
+    }
+
+    @GetMapping("/prodaud")
+    public String mostrarProdaud(Model model) {
+        List<Usuarios> usuarios = usuarioService.obtenerUsuarios();
+        model.addAttribute("usuarios", usuarios);
+        return "prodaud";
+    }
+
+    @GetMapping("/webapp")
+    public String mostrarWebapp(Model model) {
+        List<Usuarios> usuarios = usuarioService.obtenerUsuarios();
+        model.addAttribute("usuarios", usuarios);
+        return "webapp";
+    }
+
     @PostMapping("/home")
-    public String iniciarSesion(@RequestParam String nombre, @RequestParam String pass, Model model) {
-        // Buscar el usuario con el nombre y contraseña proporcionados
+    public String iniciarSesion(@RequestParam String nombre, @RequestParam String pass, HttpSession session, Model model) {
+        // Buscar el usuario con el nombre y la contraseña proporcionados
         Usuarios usuario = usuarioService.obtenerUsuarioPorNombreYPass(nombre, pass);
 
-        // Validar si el usuario existe
         if (usuario != null) {
-            return "redirect:/bienvenida";
+            // Guardar el nombre del usuario en la sesión
+            session.setAttribute("usuarioNombre", usuario.getNombre());
+
+            if ("usuario".equals(usuario.getRol())) {
+                return "redirect:/bienvenida"; // Redirigir a la página de bienvenida
+            } else if ("admin".equals(usuario.getRol())) {
+                return "redirect:/admin"; // Redirigir al panel de administración
+            } else {
+                model.addAttribute("error", "Rol no reconocido");
+                return "index";
+            }
         } else {
             model.addAttribute("error", "Nombre o contraseña incorrectos");
-            return "index";
+            return "index"; // Si las credenciales no son correctas, volver al formulario
         }
     }
+
+
 
     @PostMapping("/registro")
     public String registrarUsuario(@RequestParam String nombre, @RequestParam String correo, @RequestParam String pass,  @RequestParam String numerotel, Model model) {

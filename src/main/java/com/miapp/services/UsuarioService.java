@@ -18,6 +18,9 @@ public class UsuarioService {
     public Usuarios obtenerUsuarioPorNombreYPass(String nombre, String pass) {
         return usuarioRepository.findByNombreAndPass(nombre, pass);
     }
+    public Usuarios obtenerUsuarioPorNombre(String nombre) {
+        return usuarioRepository.findByNombre(nombre);
+    }
     // Método para guardar el nuevo usuario en la base de datos
     public void guardarUsuario(Usuarios nuevoUsuario) {
         usuarioRepository.save(nuevoUsuario);
