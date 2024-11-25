@@ -16,19 +16,6 @@
         <li><a href="#">Contáctanos</a></li>
         <li><a href="#">Sedes</a></li>
     </ul>
-</nav>
-
-<!-- Contenido principal -->
-<div class="content">
-    <h1 style="text-align: center;">Producción Audiovisual</h1>
-    <p>Generamos contenido visual impactante y profesional para fortalecer la comunicación y el branding de tu empresa.</p>
-    <h2>Ejemplos de nuestros servicios:</h2>
-    <ul>
-        <li>Producción de comerciales para televisión y redes sociales</li>
-        <li>Grabación y edición de videos corporativos</li>
-        <li>Fotografía profesional de productos</li>
-        <li>Desarrollo de animaciones y motion graphics</li>
-    </ul>
     <div class="user-session">
         <span th:if="${session.usuarioNombre == null}">
             <a href="/home">Iniciar Sesión</a>
@@ -37,9 +24,40 @@
             Hola, <span th:text="${session.usuarioNombre}"></span>!
         </span>
     </div>
+</nav>
+
+<!-- Contenido principal -->
+<div class="content">
+    <h1 style="text-align: center;">Producción Audiovisual</h1>
+    <p class="centered-text">Generamos contenido visual impactante y profesional para fortalecer la comunicación y el branding de tu empresa.</p>
+    <h2>Elige uno de nuestros servicios:</h2>
+    <div class="services-container">
+        <div class="service-card" onclick="confirmarRegistro('Produccion de comerciales para televisión y redes sociales')">
+            <img src="/images/prodaud/comerciales-televisión.jpg" alt="Producción de comerciales" class="service-image">
+            <p>Producción de comerciales para televisión y redes sociales</p>
+        </div>
+
+        <div class="service-card" onclick="confirmarRegistro('Grabacion y edición de videos corporativos')">
+            <img src="/images/prodaud/videos_corporativos.jpg" alt="Grabación y edición de videos corporativos" class="service-image">
+            <p>Grabación y edición de videos corporativos</p>
+        </div>
+
+        <div class="service-card" onclick="confirmarRegistro('Fotografia profesional de productos')">
+            <img src="/images/prodaud/fotografia-producto.jpg" alt="Fotografía profesional de productos" class="service-image">
+            <p>Fotografía profesional de productos</p>
+        </div>
+
+        <div class="service-card" onclick="confirmarRegistro('Desarrollo de animaciones y motion graphics')">
+            <img src="/images/prodaud/Desarrollo_animaciones.jpg" alt="Desarrollo de animaciones y motion graphics" class="service-image">
+            <p>Desarrollo de animaciones y motion graphics</p>
+        </div>
+
+    </div>
 </div>
 
-<script src="/js/script.js"></script>
+
+
+<script src="/js/Scriptmk.js"></script>
 
 </body>
 </html>

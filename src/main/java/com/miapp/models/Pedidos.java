@@ -16,6 +16,17 @@ public class Pedidos {
     private String descripcion;
     private String fechaPedido;
 
+    private String seccion;
+
+    // Getters y setters
+    public String getSeccion() {
+        return seccion;
+    }
+
+    public void setSeccion(String seccion) {
+        this.seccion = seccion;
+    }
+
     public Long getId() {
         return id;
     }

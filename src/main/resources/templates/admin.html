@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Administración</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="/js/ScriptAdmin.js" defer></script>
+</head>
+<body>
+
+<div class="container">
+    <h1>Panel de Administración</h1>
+    <div class="button-container">
+        <button onclick="mostrarTabla('usuarios')">Usuarios</button>
+        <button onclick="mostrarTabla('pedidos')">Pedidos</button>
+    </div>
+</div>
+
+<div id="tabla-usuarios" style="display: none;">
+    <h2>Usuarios</h2>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Correo</th>
+            <th>Teléfono</th>
+            <th>Rol</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="usuario : ${usuarios}">
+            <td th:text="${usuario.id}"></td>
+            <td th:text="${usuario.nombre}"></td>
+            <td th:text="${usuario.correo}"></td>
+            <td th:text="${usuario.numeroTelefono}"></td>
+            <td th:text="${usuario.rol}"></td>
+            <td>
+                <button onclick="editarUsuario([[${usuario.id}]])">Editar</button>
+                <button onclick="eliminarUsuario([[${usuario.id}]])">Eliminar</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <h3>Crear Usuario</h3>
+    <form th:action="@{/usuarios/crear}" method="post">
+        <input type="text" name="nombre" placeholder="Nombre" required>
+        <input type="email" name="correo" placeholder="Correo" required>
+        <input type="password" name="pass" placeholder="Contraseña" required>
+        <input type="text" name="numerotel" placeholder="Teléfono" required>
+        <button type="submit">Crear</button>
+    </form>
+</div>
+<div id="tabla-pedidos" style="display: none;">
+    <h2>Pedidos</h2>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Usuario</th>
+            <th>Descripción</th>
+            <th>Fecha</th>
+            <th>Sección</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="pedido : ${pedidos}">
+            <td th:text="${pedido.id}"></td>
+            <td th:text="${pedido.usuario.nombre}"></td>
+            <td th:text="${pedido.descripcion}"></td>
+            <td th:text="${pedido.fechaPedido}"></td>
+            <td th:text="${pedido.seccion}"></td>
+            <td>
+                <button onclick="editarPedido([[${pedido.id}]])">Editar</button>
+                <button onclick="eliminarPedido([[${pedido.id}]])">Eliminar</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <h3>Crear Pedido</h3>
+    <form th:action="@{/pedidos/crear}" method="post">
+        <input type="text" name="descripcion" placeholder="Descripción" required>
+        <input type="text" name="seccion" placeholder="Sección" required>
+        <button type="submit">Crear</button>
+    </form>
+</div>
+</body>
+</html>

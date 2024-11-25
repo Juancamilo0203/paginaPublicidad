@@ -30,39 +30,66 @@ public class PedidosController {
     private UsuarioService usuarioService;
 
     @PostMapping("/registrarPedido")
-    public String registrarPedido(@RequestParam String descripcion, HttpSession session, Model model) {
+    public String registrarPedido(
+            @RequestParam String descripcion,
+            @RequestParam String seccion,
+            HttpSession session,
+            Model model
+    ) {
         // Obtener el nombre del usuario desde la sesión
         String nombreUsuario = (String) session.getAttribute("usuarioNombre");
 
         // Validar que el usuario haya iniciado sesión
         if (nombreUsuario == null) {
             model.addAttribute("error", "Debes iniciar sesión para registrar un pedido.");
-            return "redirect:/login"; // Redirigir a la página de inicio de sesión si no hay usuario
+            return "redirect:/login";
         }
 
         // Buscar el usuario en la base de datos usando el nombre
         Usuarios usuario = usuarioService.obtenerUsuarioPorNombre(nombreUsuario);
 
-        // Validar que el usuario exista en la base de datos
         if (usuario == null) {
             model.addAttribute("error", "Usuario no encontrado en la base de datos.");
             return "redirect:/home";
         }
 
-        // Crear un nuevo pedido con los datos proporcionados
+        // Crear un nuevo pedido
         Pedidos nuevoPedido = new Pedidos();
         nuevoPedido.setUsuario(usuario);
         nuevoPedido.setDescripcion(descripcion);
-        nuevoPedido.setFechaPedido(LocalDate.now().toString()); // Fecha actual en formato ISO
+        nuevoPedido.setFechaPedido(LocalDate.now().toString()); // Fecha actual
+        nuevoPedido.setSeccion(seccion); // Asignar la sección
 
         // Guardar el pedido en la base de datos
         pedidosRepository.save(nuevoPedido);
 
-        // Redirigir al usuario a la página de marketing o de confirmación
+        // Mensaje de éxito
         model.addAttribute("success", "¡Pedido registrado exitosamente!");
-        return "redirect:/marketing";
+        return "redirect:/" + seccion; // Redirigir a la página actual
     }
 
+    //Admin features
+    @GetMapping
+    public String listarPedidos(Model model) {
+        model.addAttribute("pedidos", pedidosRepository.findAll());
+        return "admin";
+    }
+
+    @PostMapping("/crear")
+    public String crearPedido(@RequestParam String descripcion, @RequestParam String seccion) {
+        Pedidos nuevoPedido = new Pedidos();
+        nuevoPedido.setDescripcion(descripcion);
+        nuevoPedido.setSeccion(seccion);
+        nuevoPedido.setFechaPedido(LocalDate.now().toString());
+        pedidosRepository.save(nuevoPedido);
+        return "redirect:/pedidos";
+    }
+
+    @PostMapping("/eliminar/{id}")
+    public String eliminarPedido(@PathVariable Long id) {
+        pedidosRepository.deleteById(id);
+        return "redirect:/pedidos";
+    }
 
 
 }

@@ -30,6 +30,14 @@ public class UsuarioController {
         return "index";
     }
 
+    // Mostrar el formulario de inicio de sesión
+    @GetMapping("/admin")
+    public String mostrarAdmin(Model model) {
+        List<Usuarios> usuarios = usuarioService.obtenerUsuarios();
+        model.addAttribute("usuarios", usuarios);
+        return "admin";
+    }
+
     @GetMapping("/registro")
     public String registrarUsuario(Model model) {
         List<Usuarios> usuarios = usuarioService.obtenerUsuarios();
@@ -113,4 +121,32 @@ public class UsuarioController {
         // Redirigir al inicio de sesión o a otra página de bienvenida
         return "redirect:/home";
     }
+
+    //admin features
+
+    @GetMapping
+    public String listarUsuarios(Model model) {
+        model.addAttribute("usuarios", usuarioService.obtenerUsuarios());
+        return "admin";
+    }
+
+    @PostMapping("/crear")
+    public String crearUsuario(@RequestParam String nombre, @RequestParam String correo,
+                               @RequestParam String pass, @RequestParam String numerotel) {
+        Usuarios nuevoUsuario = new Usuarios();
+        nuevoUsuario.setNombre(nombre);
+        nuevoUsuario.setCorreo(correo);
+        nuevoUsuario.setPass(pass);
+        nuevoUsuario.setNumeroTelefono(numerotel);
+        nuevoUsuario.setRol("usuario");
+        usuarioService.guardarUsuario(nuevoUsuario);
+        return "redirect:/usuarios";
+    }
+
+    @PostMapping("/eliminar/{id}")
+    public String eliminarUsuario(@PathVariable Long id) {
+        usuarioService.eliminarUsuario(id);
+        return "redirect:/usuarios";
+    }
+
 }

@@ -25,4 +25,13 @@ public class UsuarioService {
     public void guardarUsuario(Usuarios nuevoUsuario) {
         usuarioRepository.save(nuevoUsuario);
     }
+
+    public void eliminarUsuario(Long id) {
+        // Verificar si el usuario existe antes de eliminarlo (opcional)
+        if (usuarioRepository.existsById(id)) {
+            usuarioRepository.deleteById(id);
+        } else {
+            throw new IllegalArgumentException("El usuario con ID " + id + " no existe.");
+        }
+    }
 }

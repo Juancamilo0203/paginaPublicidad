@@ -16,19 +16,6 @@
         <li><a href="#">Contáctanos</a></li>
         <li><a href="#">Sedes</a></li>
     </ul>
-</nav>
-
-<!-- Contenido principal -->
-<div class="content">
-    <h1 style="text-align: center;">Campañas Publicitarias</h1>
-    <p>Diseñamos y ejecutamos campañas publicitarias que conectan con tu público y logran resultados tangibles para tu negocio.</p>
-    <h2>Ejemplos de nuestros servicios:</h2>
-    <ul>
-        <li>Planificación de estrategias de marketing</li>
-        <li>Campañas publicitarias en Google Ads y redes sociales</li>
-        <li>Diseño y difusión de materiales promocionales</li>
-        <li>Análisis de impacto y reportes detallados</li>
-    </ul>
     <div class="user-session">
         <span th:if="${session.usuarioNombre == null}">
             <a href="/home">Iniciar Sesión</a>
@@ -37,9 +24,36 @@
             Hola, <span th:text="${session.usuarioNombre}"></span>!
         </span>
     </div>
-</div>
+</nav>
+<!-- Contenido principal -->
+<div class="content">
+    <h1 style="text-align: center;">Campañas Publicitarias</h1>
+    <p class="centered-text">Diseñamos y ejecutamos campañas publicitarias que conectan con tu público y logran resultados tangibles para tu negocio.</p>
+    <h2>Elige uno de nuestros servicios:</h2>
+    <div class="services-container">
+        <div class="service-card" onclick="confirmarRegistro('Planificación de estrategias de marketing')">
+            <img src="/images/campañas/Planificacion-marketing.jpg" alt="Planificación de estrategias de marketing" class="service-image">
+            <p>Planificación de estrategias de marketing</p>
+        </div>
 
-<script src="/js/script.js"></script>
+        <div class="service-card" onclick="confirmarRegistro('Campanas publicitarias en Google Ads y redes sociales')">
+            <img src="/images/campañas/Google%20Ads%20y%20redes%20sociales.png" alt="Campañas publicitarias en Google Ads y redes sociales" class="service-image">
+            <p>Campañas publicitarias en Google Ads y redes sociales</p>
+        </div>
+
+        <div class="service-card" onclick="confirmarRegistro('Diseno y difusion de materiales promocionales')">
+            <img src="/images/campañas/Diseño%20y%20difusión%20de%20materiales%20promocionales.webp" alt="Diseño y difusión de materiales promocionales" class="service-image">
+            <p>Diseño y difusión de materiales promocionales</p>
+        </div>
+
+        <div class="service-card" onclick="confirmarRegistro('Analisis de impacto y reportes detallados')">
+            <img src="/images/campañas/Análisis%20de%20impacto%20y%20reportes%20detallados.webp" alt="Análisis de impacto y reportes detallados" class="service-image">
+            <p>Análisis de impacto y reportes detallados</p>
+        </div>
+
+    </div>
+</div>
+<script src="/js/Scriptmk.js"></script>
 
 </body>
 </html>
