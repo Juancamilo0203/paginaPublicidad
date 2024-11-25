@@ -17,6 +17,14 @@
         <li><a href="#">Contáctanos</a></li>
         <li><a href="#">Sedes</a></li>
     </ul>
+    <div class="user-session">
+        <span th:if="${session.usuarioNombre == null}">
+            <a href="/home">Iniciar Sesión</a>
+        </span>
+        <span th:if="${session.usuarioNombre != null}">
+            Hola, <span th:text="${session.usuarioNombre}"></span>!
+        </span>
+    </div>
 </nav>
 
 <!-- Carrusel -->
@@ -33,25 +41,24 @@
     <div class="carousel-arrow carousel-arrow-right" onclick="nextImage()">&#10095;</div>
 </div>
 
-<!-- Apartado de Servicios -->
-<h1>Nuestros Servicios</h1>
+<h1 style="text-align: center;">Nuestros Servicios</h1>
 <div class="services">
-    <div class="service-card">
+    <a href="/marketing" class="service-card">
         <h3>Marketing Digital</h3>
         <p>Impulsamos tu presencia en línea y aumentamos tu visibilidad.</p>
-    </div>
-    <div class="service-card">
+    </a>
+    <a href="/webapp" class="service-card">
         <h3>Diseño y Desarrollo Web</h3>
         <p>Creamos sitios web personalizados y adaptativos para tu negocio.</p>
-    </div>
-    <div class="service-card">
+    </a>
+    <a href="/prodaud" class="service-card">
         <h3>Producción Audiovisual</h3>
         <p>Generamos contenido visual de alta calidad para tus campañas.</p>
-    </div>
-    <div class="service-card">
+    </a>
+    <a href="/campañas" class="service-card">
         <h3>Campañas Publicitarias</h3>
         <p>Desarrollamos estrategias publicitarias para maximizar tu alcance.</p>
-    </div>
+    </a>
 </div>
 
 <!-- Scripts para el carrusel y el menú -->
