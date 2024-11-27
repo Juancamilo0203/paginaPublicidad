@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="">
 <head>
     <title>Administración</title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/adminStyles.css">
     <script src="/js/ScriptAdmin.js" defer></script>
 </head>
 <body>
@@ -13,77 +13,87 @@
         <button onclick="mostrarTabla('usuarios')">Usuarios</button>
         <button onclick="mostrarTabla('pedidos')">Pedidos</button>
     </div>
+
+    <!-- Tabla de Usuarios -->
+    <div id="tabla-usuarios" style="display: none;">
+        <h2>Usuarios</h2>
+        <table border="1">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Teléfono</th>
+                <th>Rol</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="usuario : ${usuarios}">
+                <td th:text="${usuario.id}"></td>
+                <td th:text="${usuario.nombre}"></td>
+                <td th:text="${usuario.correo}"></td>
+                <td th:text="${usuario.numeroTelefono}"></td>
+                <td th:text="${usuario.rol}"></td>
+                <td>
+                    <button th:onclick="'eliminarUsuario(' + ${usuario.id} + ')'">Eliminar</button>
+                    <button onclick="mostrarPopup('crear', 'usuario.id')">Editar</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <h3>Crear Usuario</h3>
+        <button onclick="mostrarPopup('crear', 'usuario')">Crear Usuario</button>
+    </div>
+
+    <!-- Tabla de Pedidos -->
+    <div id="tabla-pedidos" style="display: none;">
+        <h2>Pedidos</h2>
+        <table border="1">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Usuario</th>
+                <th>Descripción</th>
+                <th>Fecha</th>
+                <th>Sección</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="pedido : ${pedidos}">
+                <td th:text="${pedido.id}"></td>
+                <td th:text="${pedido.usuario.nombre}"></td>
+                <td th:text="${pedido.descripcion}"></td>
+                <td th:text="${pedido.fechaPedido}"></td>
+                <td th:text="${pedido.seccion}"></td>
+                <td>
+                    <button onclick="editarPedido([[${pedido.id}]])">Editar</button>
+                    <button th:onclick="'eliminarPedido(' + ${pedido.id} + ')'">Eliminar</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <h3>Crear Pedido</h3>
+        <button onclick="mostrarPopup('crear', 'pedido')">Crear Pedido</button>
+    </div>
+
 </div>
 
-<div id="tabla-usuarios" style="display: none;">
-    <h2>Usuarios</h2>
-    <table border="1">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Correo</th>
-            <th>Teléfono</th>
-            <th>Rol</th>
-            <th>Acciones</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="usuario : ${usuarios}">
-            <td th:text="${usuario.id}"></td>
-            <td th:text="${usuario.nombre}"></td>
-            <td th:text="${usuario.correo}"></td>
-            <td th:text="${usuario.numeroTelefono}"></td>
-            <td th:text="${usuario.rol}"></td>
-            <td>
-                <button onclick="editarUsuario([[${usuario.id}]])">Editar</button>
-                <button onclick="eliminarUsuario([[${usuario.id}]])">Eliminar</button>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-    <h3>Crear Usuario</h3>
-    <form th:action="@{/usuarios/crear}" method="post">
-        <input type="text" name="nombre" placeholder="Nombre" required>
-        <input type="email" name="correo" placeholder="Correo" required>
-        <input type="password" name="pass" placeholder="Contraseña" required>
-        <input type="text" name="numerotel" placeholder="Teléfono" required>
-        <button type="submit">Crear</button>
-    </form>
+<!-- Modal (Popup) para Crear o Editar Usuario/Pedido -->
+<div id="modal-popup" class="modal" style="display: none;">
+    <div class="modal-content">
+        <span onclick="cerrarPopup()" style="cursor: pointer;">&times;</span>
+        <h3 id="popup-title"></h3>
+        <form id="popup-form" method="post">
+            <input type="text" id="nombre" name="nombre" placeholder="Nombre" required>
+            <input type="email" id="correo" name="correo" placeholder="Correo" required>
+            <input type="password" id="pass" name="pass" placeholder="Contraseña" required>
+            <input type="text" id="numerotel" name="numerotel" placeholder="Teléfono" required>
+            <button type="submit">Guardar</button>
+        </form>
+    </div>
 </div>
-<div id="tabla-pedidos" style="display: none;">
-    <h2>Pedidos</h2>
-    <table border="1">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Usuario</th>
-            <th>Descripción</th>
-            <th>Fecha</th>
-            <th>Sección</th>
-            <th>Acciones</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="pedido : ${pedidos}">
-            <td th:text="${pedido.id}"></td>
-            <td th:text="${pedido.usuario.nombre}"></td>
-            <td th:text="${pedido.descripcion}"></td>
-            <td th:text="${pedido.fechaPedido}"></td>
-            <td th:text="${pedido.seccion}"></td>
-            <td>
-                <button onclick="editarPedido([[${pedido.id}]])">Editar</button>
-                <button onclick="eliminarPedido([[${pedido.id}]])">Eliminar</button>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-    <h3>Crear Pedido</h3>
-    <form th:action="@{/pedidos/crear}" method="post">
-        <input type="text" name="descripcion" placeholder="Descripción" required>
-        <input type="text" name="seccion" placeholder="Sección" required>
-        <button type="submit">Crear</button>
-    </form>
-</div>
+
 </body>
 </html>

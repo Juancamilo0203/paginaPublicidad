@@ -21,6 +21,12 @@ public class UsuarioService {
     public Usuarios obtenerUsuarioPorNombre(String nombre) {
         return usuarioRepository.findByNombre(nombre);
     }
+
+    public Usuarios obtenerUsuarioPorId(Long id) {
+        return usuarioRepository.findById(id).orElse(null);  // Si no se encuentra el usuario, devuelve null
+    }
+
+
     // Método para guardar el nuevo usuario en la base de datos
     public void guardarUsuario(Usuarios nuevoUsuario) {
         usuarioRepository.save(nuevoUsuario);

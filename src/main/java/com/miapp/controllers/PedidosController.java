@@ -5,6 +5,7 @@ import com.miapp.models.Pedidos;
 import com.miapp.models.Usuarios;
 import com.miapp.repositories.PedidosRepository;
 import com.miapp.repositories.UsuarioRepository;
+import com.miapp.services.PedidosService;
 import com.miapp.services.UsuarioService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 @RestController
-@RequestMapping("/pedidos")
+@RequestMapping("/pedido")
 public class PedidosController {
 
     @Autowired
@@ -28,6 +29,8 @@ public class PedidosController {
 
     @Autowired
     private UsuarioService usuarioService;
+    @Autowired
+    private PedidosService pedidosService;
 
     @PostMapping("/registrarPedido")
     public String registrarPedido(
@@ -82,14 +85,15 @@ public class PedidosController {
         nuevoPedido.setSeccion(seccion);
         nuevoPedido.setFechaPedido(LocalDate.now().toString());
         pedidosRepository.save(nuevoPedido);
-        return "redirect:/pedidos";
+        return "redirect:/admin";
     }
 
-    @PostMapping("/eliminar/{id}")
-    public String eliminarPedido(@PathVariable Long id) {
-        pedidosRepository.deleteById(id);
-        return "redirect:/pedidos";
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> eliminarPedido(@PathVariable Long id) {
+        pedidosService.eliminarPedido(id);  // Usar el repositorio de pedidos para eliminar el pedido
+        return ResponseEntity.noContent().build();
     }
+
 
 
 }

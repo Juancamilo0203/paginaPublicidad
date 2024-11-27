@@ -1,9 +1,12 @@
 package com.miapp.controllers;
 
+import com.miapp.models.Pedidos;
 import com.miapp.models.Usuarios;
+import com.miapp.services.PedidosService;
 import com.miapp.services.UsuarioService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +18,8 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioService usuarioService;
+    @Autowired
+    private PedidosService pedidosService;
 
     // Redirigir a "/home" cuando se acceda a la raíz "/"
     @GetMapping("/")
@@ -30,13 +35,15 @@ public class UsuarioController {
         return "index";
     }
 
-    // Mostrar el formulario de inicio de sesión
     @GetMapping("/admin")
     public String mostrarAdmin(Model model) {
         List<Usuarios> usuarios = usuarioService.obtenerUsuarios();
+        List<Pedidos> pedidos = pedidosService.obtenerPedidos();  // Obtén los pedidos desde tu servicio
         model.addAttribute("usuarios", usuarios);
+        model.addAttribute("pedidos", pedidos);  // Asegúrate de que se pase la lista de pedidos
         return "admin";
     }
+
 
     @GetMapping("/registro")
     public String registrarUsuario(Model model) {
@@ -140,13 +147,43 @@ public class UsuarioController {
         nuevoUsuario.setNumeroTelefono(numerotel);
         nuevoUsuario.setRol("usuario");
         usuarioService.guardarUsuario(nuevoUsuario);
-        return "redirect:/usuarios";
+        return "redirect:/admin";
     }
 
-    @PostMapping("/eliminar/{id}")
-    public String eliminarUsuario(@PathVariable Long id) {
+    @DeleteMapping("/usuario/{id}")
+    public ResponseEntity<Void> eliminarUsuario(@PathVariable Long id) {
         usuarioService.eliminarUsuario(id);
-        return "redirect:/usuarios";
+        return ResponseEntity.noContent().build();  // Responde con 204 No Content si se elimina correctamente
     }
+
+    @GetMapping("/usuario/{id}")
+    @ResponseBody
+    public ResponseEntity<Usuarios> obtenerUsuarioPorId(@PathVariable Long id) {
+        Usuarios usuario = usuarioService.obtenerUsuarioPorId(id);
+        if (usuario != null) {
+            return ResponseEntity.ok(usuario);  // Devolver los datos del usuario
+        } else {
+            return ResponseEntity.notFound().build();  // Si no se encuentra el usuario, retornar 404
+        }
+    }
+
+
+
+    @PostMapping("/usuario/editar/{id}")
+    public String editarUsuario(@PathVariable Long id, @RequestParam String nombre,
+                                @RequestParam String correo, @RequestParam String pass,
+                                @RequestParam String numerotel) {
+        Usuarios usuario = usuarioService.obtenerUsuarioPorId(id);
+        if (usuario != null) {
+            usuario.setNombre(nombre);
+            usuario.setCorreo(correo);
+            usuario.setPass(pass);  // Si quieres actualizar la contraseña, asegúrate de hacerlo de forma segura
+            usuario.setNumeroTelefono(numerotel);
+            usuarioService.guardarUsuario(usuario);  // Guardar los cambios en la base de datos
+            return "redirect:/admin";  // Redirigir al panel de administración después de editar
+        }
+        return "redirect:/admin";  // Si no se encuentra el usuario, redirigir al panel de administración
+    }
+
 
 }
