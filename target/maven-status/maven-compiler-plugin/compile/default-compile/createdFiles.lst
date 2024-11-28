@@ -1,4 +1,10 @@
+com\miapp\controllers\PedidosController.class
 com\miapp\controllers\UsuarioController.class
-com\miapp\Myapp.class
-com\miapp\repositories\UsuarioRepository.class
+com\miapp\models\PedidoDto.class
+com\miapp\services\PedidosService.class
+com\miapp\models\Pedidos.class
 com\miapp\models\Usuarios.class
+com\miapp\repositories\PedidosRepository.class
+com\miapp\repositories\UsuarioRepository.class
+com\miapp\Myapp.class
+com\miapp\services\UsuarioService.class

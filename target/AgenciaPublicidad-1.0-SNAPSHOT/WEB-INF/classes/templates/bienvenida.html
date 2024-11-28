@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/stylesBinevenida.css">
+    <title>Bienvenida</title>
+</head>
+<body>
+
+
+<!-- Menú Desplegable -->
+<nav class="navbar">
+    <div class="menu-toggle" onclick="toggleMenu()">&#9776;</div> <!-- Botón hamburguesa -->
+    <ul id="nav-links" class="nav-links">
+        <li><a href="#">¿Quiénes somos?</a></li>
+        <li><a href="#">Contáctanos</a></li>
+        <li><a href="#">Sedes</a></li>
+    </ul>
+    <div class="user-session">
+        <span th:if="${session.usuarioNombre == null}">
+            <a href="/home">Iniciar Sesión</a>
+        </span>
+        <span th:if="${session.usuarioNombre != null}">
+            Hola, <span th:text="${session.usuarioNombre}"></span>!
+        </span>
+    </div>
+</nav>
+
+<!-- Carrusel -->
+<div class="carousel">
+    <div class="carousel-images">
+        <img src="/images/imagen1.jpeg" alt="Imagen 1">
+        <img src="/images/imagen2.jpeg" alt="Imagen 2">
+        <img src="/images/imagen3.png" alt="Imagen 3">
+        <img src="/images/imagen4.jpg" alt="Imagen 4">
+
+    </div>
+    <!-- Flechas del carrusel -->
+    <div class="carousel-arrow carousel-arrow-left" onclick="prevImage()">&#10094;</div>
+    <div class="carousel-arrow carousel-arrow-right" onclick="nextImage()">&#10095;</div>
+</div>
+
+<h1 style="text-align: center;">Nuestros Servicios</h1>
+<div class="services">
+    <a href="/marketing" class="service-card">
+        <h3>Marketing Digital</h3>
+        <p>Impulsamos tu presencia en línea y aumentamos tu visibilidad.</p>
+    </a>
+    <a href="/webapp" class="service-card">
+        <h3>Diseño y Desarrollo Web</h3>
+        <p>Creamos sitios web personalizados y adaptativos para tu negocio.</p>
+    </a>
+    <a href="/prodaud" class="service-card">
+        <h3>Producción Audiovisual</h3>
+        <p>Generamos contenido visual de alta calidad para tus campañas.</p>
+    </a>
+    <a href="/campañas" class="service-card">
+        <h3>Campañas Publicitarias</h3>
+        <p>Desarrollamos estrategias publicitarias para maximizar tu alcance.</p>
+    </a>
+</div>
+
+<!-- Scripts para el carrusel y el menú -->
+<script src="/js/script.js"></script>
+
+</body>
+</html>

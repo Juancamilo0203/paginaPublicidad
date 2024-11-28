@@ -35,29 +35,6 @@ function mostrarPopup(accion, idUsuario) {
     modal.style.display = "block";
 }
 
-
-// Función para cargar los datos de un usuario
-function cargarDatosUsuario(idUsuario) {
-    // Hacer una solicitud AJAX para obtener los datos del usuario por su ID
-    fetch('/usuario/' + idUsuario)
-        .then(response => response.json())
-        .then(data => {
-            // Rellenar los campos del formulario con los datos del usuario
-            document.getElementById("nombre").value = data.nombre;
-            document.getElementById("correo").value = data.correo;
-            document.getElementById("pass").value = '';  // Dejar la contraseña vacía por seguridad
-            document.getElementById("numerotel").value = data.numeroTelefono;
-        })
-        .catch(error => console.log('Error al cargar los datos del usuario:', error));
-}
-
-// Función para cerrar el popup
-function cerrarPopup() {
-    document.getElementById("modal-popup").style.display = "none";
-}
-
-
-
 // Función de eliminación para usuarios
 function eliminarUsuario(id) {
     if (confirm("¿Seguro que deseas eliminar este usuario?")) {
@@ -84,20 +61,56 @@ function eliminarUsuario(id) {
     }
 }
 
+
+
+
+
+
+// Función para cargar los datos de un usuario
+function cargarDatosUsuario(idUsuario) {
+    // Hacer una solicitud AJAX para obtener los datos del usuario por su ID
+    fetch('/usuario/' + idUsuario)
+        .then(response => response.json())
+        .then(data => {
+            // Rellenar los campos del formulario con los datos del usuario
+            document.getElementById("nombre").value = data.nombre;
+            document.getElementById("correo").value = data.correo;
+            document.getElementById("pass").value = '';  // Dejar la contraseña vacía por seguridad
+            document.getElementById("numerotel").value = data.numeroTelefono;
+        })
+        .catch(error => console.log('Error al cargar los datos del usuario:', error));
+}
+
+// Función para cerrar el popup
+function cerrarPopup() {
+    document.getElementById("modal-popup").style.display = "none";
+}
+
+
+
+
 // Función de eliminación para pedidos
 function eliminarPedido(id) {
-    fetch('/pedido/' + id, {
-        method: 'DELETE',
-    })
-        .then(response => {
-            if (response.ok) {
-                console.log('Pedido eliminado');
-                // Aquí puedes hacer algo para actualizar la vista después de eliminar el pedido, como recargar la página o eliminar la fila de la tabla.
-            } else {
-                console.error('Error al eliminar el pedido');
+    if (confirm("¿Seguro que deseas eliminar este pedido?")) {
+        // Realizamos una petición DELETE al backend
+        fetch('/pedidos/' + id, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
             }
         })
-        .catch(error => {
-            console.error('Error en la solicitud:', error);
-        });
+            .then(response => {
+                if (response.ok) {
+                    alert('pedido eliminado con éxito');
+                    location.reload();
+                } else {
+                    alert('Error al eliminar el pedido');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Ocurrió un error al intentar eliminar al pediodo');
+            });
+    }
 }
+

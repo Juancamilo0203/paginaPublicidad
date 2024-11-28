@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/stylesBinevenida.css">
+    <title>Diseño y Desarrollo Web</title>
+</head>
+<body>
+
+<!-- Barra de navegación -->
+<nav class="navbar">
+    <div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
+    <ul id="nav-links" class="nav-links">
+        <li><a href="#">¿Quiénes somos?</a></li>
+        <li><a href="#">Contáctanos</a></li>
+        <li><a href="#">Sedes</a></li>
+    </ul>
+    <div class="user-session">
+        <span th:if="${session.usuarioNombre == null}">
+            <a href="/home">Iniciar Sesión</a>
+        </span>
+        <span th:if="${session.usuarioNombre != null}">
+            Hola, <span th:text="${session.usuarioNombre}"></span>!
+        </span>
+    </div>
+</nav>
+
+<!-- Contenido principal -->
+<div class="content">
+    <h1 style="text-align: center;">Diseño y Desarrollo Web</h1>
+    <p class="centered-text">Creamos plataformas web innovadoras que ofrecen una experiencia óptima al usuario y reflejan la identidad de tu marca.</p>
+    <h2>Elige uno de nuestros servicios:</h2>
+    <div class="services-container">
+        <div class="service-card" onclick="confirmarRegistro('Diseno de sitios web corporativos')">
+            <img src="/images/webapp/Diseño-corporativos.jpg" alt="Diseno de sitios web corporativos" class="service-image">
+            <p>Diseño de sitios web corporativos</p>
+        </div>
+
+        <div class="service-card" onclick="confirmarRegistro('Desarrollo de aplicaciones web personalizadas')">
+            <img src="/images/webapp/Desarrollo-personalizadas.jpg" alt="Desarrollo de aplicaciones web personalizadas" class="service-image">
+            <p>Desarrollo de aplicaciones web personalizadas</p>
+        </div>
+
+        <div class="service-card" onclick="confirmarRegistro('Integración con plataformas de comercio electrónico')">
+            <img src="/images/webapp/Integración-electrónico.jpg" alt="Integración con plataformas de comercio electrónico" class="service-image">
+            <p>Integración con plataformas de comercio electrónico</p>
+        </div>
+
+        <div class="service-card" onclick="confirmarRegistro('Optimizacion de rendimiento web')">
+            <img src="/images/webapp/Optimización-web.jpg" alt="Optimizacion de rendimiento web" class="service-image">
+            <p>Optimización de rendimiento web</p>
+        </div>
+
+    </div>
+</div>
+
+<script src="/js/Scriptmk.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,231 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+}
+h1 {
+    text-align: center;
+}
+/* Barra de navegación */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #333;
+    color: white;
+}
+
+.menu-toggle {
+    font-size: 30px;
+    cursor: pointer;
+    display: none; /* Oculto por defecto en pantallas grandes */
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+}
+
+.nav-links li {
+    margin-right: 20px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+}
+
+/* Menú desplegable */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background-color: #333;
+        padding: 10px;
+    }
+
+    .nav-links li {
+        margin: 10px 0;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .menu-toggle {
+        display: block; /* Mostrar el ícono de hamburguesa en pantallas pequeñas */
+    }
+}
+
+/* Estilo de los enlaces del menú */
+.nav-links a {
+    padding: 10px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.nav-links a:hover {
+    background-color: #444;
+}
+
+/* Carrusel */
+.carousel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    width: 60%;  /* Tamaño mediano: 60% del contenedor */
+    margin: 20px auto;
+    position: relative;
+}
+
+.carousel-images {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel-images img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+}
+
+.carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 30px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    cursor: pointer;
+}
+
+.carousel-arrow-left {
+    left: 10px;
+}
+
+.carousel-arrow-right {
+    right: 10px;
+}
+
+
+/* Apartado de servicios */
+.services {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+}
+
+.service-card {
+    display: block; /* Asegura que se comporte como un contenedor */
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    width: 20%;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, background-color 0.3s;
+    text-decoration: none; /* Elimina el subrayado */
+    color: #333; /* Define un color base para el texto */
+}
+
+.service-card:hover {
+    transform: translateY(-10px); /* Efecto hover */
+    background-color: #e6e6e6; /* Fondo más claro al pasar el cursor */
+}
+
+.service-card:link,
+.service-card:visited,
+.service-card:hover,
+.service-card:active {
+    text-decoration: none; /* Sin subrayado en todos los estados */
+    color: #333; /* Color uniforme */
+}
+
+/* Centrado del texto <p> */
+.centered-text {
+    text-align: center;
+    font-size: 1.2em;
+    margin: 20px auto;
+    width: 80%;  /* Asegura que no ocupe toda la pantalla */
+}
+
+/* Contenedor de las cartas de servicios */
+.services-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin: 20px 0;
+}
+
+.service-card {
+    background-color: #f4f4f4;
+    width: 23%;  /* Tamaño de cada carta */
+    margin: 10px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    transition: transform 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+}
+
+/* Estilos de la imagen dentro de las cartas */
+.service-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+/* Estilo de los párrafos dentro de cada carta */
+.service-card p {
+    color: #333;
+    font-size: 1em;
+    margin: 0;
+}
+
+/* Ajustes responsivos: cuando la pantalla es más pequeña */
+@media (max-width: 768px) {
+    .services-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .service-card {
+        width: 80%;
+        margin-bottom: 20px;
+    }
+}
+/* Estilo para el <h2> */
+h2 {
+    text-align: center;
+    font-size: 1.5em;  /* Ajusta el tamaño del texto según lo necesites */
+    margin: 20px auto;
+}
+.user-session {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 16px;
+    font-weight: bold;
+}
+.user-session a {
+    text-decoration: none;
+    color: #007bff;
+}
+.user-session a:hover {
+    color: #0056b3;
+}
